@@ -1,10 +1,14 @@
 package com.faryz.sciencevibeapp
 
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
+import android.util.Log.d
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.fragment.findNavController
 import com.faryz.sciencevibeapp.databinding.FragmentSecondBinding
 import com.faryz.sciencevibeapp.databinding.FragmentThirdBinding
 
@@ -23,11 +27,40 @@ class ThirdFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         _binding = FragmentThirdBinding.inflate(inflater, container, false)
+        binding.appBarName3.text = (activity as MainActivity).name
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        binding.imageSoundOnOff.setOnClickListener {
+            if ((activity as MainActivity).sound) {
+                binding.imageSoundOnOff.setImageResource(R.drawable.off_button)
+                (activity as MainActivity).sound = false
+                d("bomoh", "click")
+            } else {
+                binding.imageSoundOnOff.setImageResource(R.drawable.on_button)
+                (activity as MainActivity).sound = true
+                d("bomoh", "click2")
+            }
+        }
+
+        binding.editTextTextPersonName.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
+
+            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+                binding.appBarName3.text = binding.editTextTextPersonName.text.toString()
+                (activity as MainActivity).name = binding.editTextTextPersonName.text.toString()
+            }
+
+            override fun afterTextChanged(p0: Editable?) {}
+
+        })
+
+        binding.homeImage.setOnClickListener {
+            findNavController().popBackStack(R.id.SecondFragment, false)
+        }
     }
 
     override fun onDestroyView() {

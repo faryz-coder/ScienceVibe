@@ -25,6 +25,8 @@ class SecondFragment : Fragment() {
     ): View? {
 
         _binding = FragmentSecondBinding.inflate(inflater, container, false)
+        binding.appBarName2.text = (activity as MainActivity).name
+
         return binding.root
 
     }
@@ -33,7 +35,11 @@ class SecondFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         binding.buttonExercise.setOnClickListener {
-            findNavController().navigate(R.id.action_SecondFragment_to_fourthFragment)
+            findNavController().navigate(R.id.action_SecondFragment_to_FirstFragment)
+        }
+
+        binding.buttonSetting.setOnClickListener {
+            findNavController().navigate(R.id.action_SecondFragment_to_thirdFragment)
         }
     }
 

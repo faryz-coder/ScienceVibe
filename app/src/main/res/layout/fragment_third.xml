@@ -36,7 +36,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/textView4"
+            android:id="@+id/app_bar_name3"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:fontFamily="@font/beachday"
@@ -78,7 +78,10 @@
         android:ems="10"
         android:fontFamily="@font/plasticloveregular"
         android:inputType="textPersonName"
+        android:maxWidth="200dp"
+        android:paddingHorizontal="5dp"
         android:textColor="@color/black"
+        android:textSize="20sp"
         app:layout_constraintStart_toEndOf="@+id/textView2"
         app:layout_constraintTop_toBottomOf="@+id/imageView3" />
 

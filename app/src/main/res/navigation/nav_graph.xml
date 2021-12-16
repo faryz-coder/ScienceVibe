@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/FirstFragment">
+    app:startDestination="@id/SecondFragment">
 
     <fragment
         android:id="@+id/FirstFragment"
@@ -12,8 +12,8 @@
         tools:layout="@layout/fragment_first">
 
         <action
-            android:id="@+id/action_FirstFragment_to_SecondFragment"
-            app:destination="@id/SecondFragment" />
+            android:id="@+id/action_FirstFragment_to_FifthFragment"
+            app:destination="@id/FifthFragment" />
     </fragment>
     <fragment
         android:id="@+id/SecondFragment"
@@ -27,9 +27,6 @@
         <action
             android:id="@+id/action_SecondFragment_to_thirdFragment"
             app:destination="@id/ThirdFragment" />
-        <action
-            android:id="@+id/action_SecondFragment_to_fourthFragment"
-            app:destination="@id/FourthFragment" />
     </fragment>
     <fragment
         android:id="@+id/ThirdFragment"
@@ -41,4 +38,13 @@
         android:name="com.faryz.sciencevibeapp.FourthFragment"
         android:label="@string/fourth_fragment_label"
         tools:layout="@layout/fragment_fourth" />
+    <fragment
+        android:id="@+id/FifthFragment"
+        android:name="com.faryz.sciencevibeapp.FifthFragment"
+        android:label="@string/fifth_fragment_label"
+        tools:layout="@layout/fragment_fifth" >
+        <action
+            android:id="@+id/action_FifthFragment_to_FourthFragment"
+            app:destination="@id/FourthFragment" />
+    </fragment>
 </navigation>
