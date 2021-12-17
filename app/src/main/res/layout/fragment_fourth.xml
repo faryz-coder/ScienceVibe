@@ -241,4 +241,14 @@
         android:src="@drawable/buble_you_can_do_it"
         app:layout_constraintStart_toEndOf="@+id/image_monkey_eye_close"
         app:layout_constraintTop_toTopOf="@+id/image_monkey_eye_close" />
+
+    <ProgressBar
+        android:id="@+id/progressBar2"
+        style="?android:attr/progressBarStyle"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/constraintLayout" />
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -31,7 +31,6 @@ class ThirdFragment : Fragment() {
         // Inflate the layout for this fragment
         _binding = FragmentThirdBinding.inflate(inflater, container, false)
         binding.appBarName3.text = (activity as MainActivity).name
-//        bgMusic = MediaPlayer.create(requireContext(), R.raw.background_music)
         return binding.root
     }
 
@@ -69,21 +68,6 @@ class ThirdFragment : Fragment() {
             findNavController().popBackStack(R.id.SecondFragment, false)
         }
     }
-
-//    fun playBgm(tf: Boolean) {
-//        if (tf) {
-//            bgMusic?.setOnPreparedListener {
-//                bgMusic?.start()
-//            }
-//            bgMusic?.setOnCompletionListener {
-//                bgMusic?.start()
-//            }
-//        } else {
-//            bgMusic?.setOnPreparedListener {
-//                bgMusic?.stop()
-//            }
-//        }
-//    }
 
     override fun onDestroyView() {
         super.onDestroyView()

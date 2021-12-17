@@ -70,6 +70,7 @@ class FourthFragment : Fragment() {
     }
 
     private fun submitAnswer(ans: String) {
+        enableButton(false)
         if (count < 1) {
             nextQuestion()
             binding.opA.isVisible = true
@@ -114,10 +115,13 @@ class FourthFragment : Fragment() {
             Picasso.get().load(listOption[count].d).into(binding.imageD)
             playCorrect(2)
             count += 1
+            enableButton(true)
         }
     }
 
     private fun getListQuestion() {
+        enableButton(false)
+        binding.progressBar2.isVisible = true
         db.collection("list").document("list question")
             .get()
             .addOnSuccessListener {
@@ -143,6 +147,8 @@ class FourthFragment : Fragment() {
                     }
                 }
             }
+        enableButton(true)
+        binding.progressBar2.isVisible = false
     }
 
     override fun onDestroyView() {
@@ -169,6 +175,13 @@ class FourthFragment : Fragment() {
                 }
             }
         }
+    }
+
+    private fun enableButton(t: Boolean) {
+        binding.imageA.isEnabled = t
+        binding.imageB.isEnabled = t
+        binding.imageC.isEnabled = t
+        binding.imageD.isEnabled = t
     }
 }
 
