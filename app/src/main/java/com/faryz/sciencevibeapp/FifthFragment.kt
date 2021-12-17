@@ -33,10 +33,11 @@ class FifthFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         binding.startNowButton.setOnClickListener {
-            findNavController().navigate(R.id.action_FifthFragment_to_FourthFragment)
+            findNavController().navigate(R.id.action_FifthFragment_to_SecondFragment)
         }
         binding.homeImage.setOnClickListener {
-            findNavController().popBackStack(R.id.SecondFragment, false)
+//            findNavController().popBackStack(R.id.SecondFragment, false)
+            findNavController().navigate(R.id.action_FifthFragment_to_SecondFragment)
         }
     }
 

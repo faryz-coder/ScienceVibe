@@ -38,7 +38,6 @@ class FourthFragment : Fragment() {
 
         _binding = FragmentFourthBinding.inflate(inflater, container, false)
         binding.appBarName4.text = (activity as MainActivity).name
-        getListQuestion()
         binding.opA.isVisible = false
         binding.opB.isVisible = false
         binding.opC.isVisible = false
@@ -71,19 +70,16 @@ class FourthFragment : Fragment() {
 
     private fun submitAnswer(ans: String) {
         enableButton(false)
+        d("submitAnswer", "ans:$ans, count: $count")
         if (count < 1) {
-            nextQuestion()
-            binding.opA.isVisible = true
-            binding.opB.isVisible = true
-            binding.opC.isVisible = true
-            binding.opD.isVisible = true
-            binding.imageMonkeyEyeClose.isVisible = true
-            binding.monkeyBubble.isVisible = true
-            binding.layoutA.setBackgroundResource(R.drawable.card_background)
-            binding.layoutB.setBackgroundResource(R.drawable.card_background)
-            binding.layoutC.setBackgroundResource(R.drawable.card_background)
-            binding.layoutD.setBackgroundResource(R.drawable.card_background)
-        } else if (count > 0 && count <= listQuestion.size) {
+            var year = 7
+            if (ans == "A") { year = 7 }
+            if (ans == "B") { year = 8 }
+            if (ans == "C") { year = 9 }
+            if (ans == "D") { year = 10 }
+            getListQuestion(year)
+        }
+        else if (count > 0 && count <= listQuestion.size) {
             checkAnswer(ans)
             Handler(Looper.getMainLooper()).postDelayed({
                 if (count<listQuestion.size) {
@@ -119,25 +115,28 @@ class FourthFragment : Fragment() {
         }
     }
 
-    private fun getListQuestion() {
-        enableButton(false)
+    private fun getListQuestion(year: Int) {
         binding.progressBar2.isVisible = true
-        db.collection("list").document("list question")
+        db.collection("list question").document("year $year")
             .get()
             .addOnSuccessListener {
                 // get list question
-                for (question in it.data!!.keys) {
+                for (question in it.data!!.keys.sorted()) {
                     listQuestion.add(ListQuestion(question))
                 }
+                d("listQuestion" , "${it.data!!.keys.sorted()}")
 
                 // get option contain link for the image
                 for (option in it.data!!.values) {
                     val v = option as ArrayList<String>
                     listOption.add(ListOption(v[0], v[1], v[2], v[3]))
                 }
+
+                displayQuestion()
+                nextQuestion()
             }
         // get answer
-        db.collection("list").document("list answer")
+        db.collection("list answer").document("year $year")
             .get()
             .addOnSuccessListener {
                 for (answer in it.data!!.values) {
@@ -149,6 +148,7 @@ class FourthFragment : Fragment() {
             }
         enableButton(true)
         binding.progressBar2.isVisible = false
+
     }
 
     override fun onDestroyView() {
@@ -182,6 +182,19 @@ class FourthFragment : Fragment() {
         binding.imageB.isEnabled = t
         binding.imageC.isEnabled = t
         binding.imageD.isEnabled = t
+    }
+
+    private fun displayQuestion() {
+        binding.opA.isVisible = true
+        binding.opB.isVisible = true
+        binding.opC.isVisible = true
+        binding.opD.isVisible = true
+        binding.imageMonkeyEyeClose.isVisible = true
+        binding.monkeyBubble.isVisible = true
+        binding.layoutA.setBackgroundResource(R.drawable.card_background)
+        binding.layoutB.setBackgroundResource(R.drawable.card_background)
+        binding.layoutC.setBackgroundResource(R.drawable.card_background)
+        binding.layoutD.setBackgroundResource(R.drawable.card_background)
     }
 }
 
