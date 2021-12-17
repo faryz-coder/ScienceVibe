@@ -136,7 +136,7 @@ class FourthFragment : Fragment() {
                     displayQuestion()
                     nextQuestion()
                 }catch (e: kotlin.NullPointerException) {
-                    
+
                 }
             }
             .addOnFailureListener {  }
