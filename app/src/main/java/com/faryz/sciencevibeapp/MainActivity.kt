@@ -18,6 +18,7 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var appBarConfiguration: AppBarConfiguration
     private lateinit var binding: ActivityMainBinding
+    private var back_pressed: kotlin.Long = 0
     var sound : Boolean = true
     var name : String = "NAME"
 
@@ -60,6 +61,8 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onBackPressed() {
-        
+        if (back_pressed + 2000 > System.currentTimeMillis()) this.finishAffinity();
+        else android.widget.Toast.makeText(getBaseContext(), "Press once again to exit!", android.widget.Toast.LENGTH_SHORT).show();
+        back_pressed = System.currentTimeMillis();
     }
 }
