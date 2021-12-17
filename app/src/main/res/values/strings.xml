@@ -14,4 +14,5 @@
     <string name="third_fragment_label">ThirdFragment</string>
     <string name="fourth_fragment_label">Forth Fragment</string>
     <string name="fifth_fragment_label">FifthFragment</string>
+    <string name="sixth_fragment_label">SixthFragment</string>
 </resources>

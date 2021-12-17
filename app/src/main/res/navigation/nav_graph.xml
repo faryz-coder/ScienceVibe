@@ -37,7 +37,11 @@
         android:id="@+id/FourthFragment"
         android:name="com.faryz.sciencevibeapp.FourthFragment"
         android:label="@string/fourth_fragment_label"
-        tools:layout="@layout/fragment_fourth" />
+        tools:layout="@layout/fragment_fourth" >
+        <action
+            android:id="@+id/action_FourthFragment_to_SixthFragment"
+            app:destination="@id/SixthFragment" />
+    </fragment>
     <fragment
         android:id="@+id/FifthFragment"
         android:name="com.faryz.sciencevibeapp.FifthFragment"
@@ -47,4 +51,9 @@
             android:id="@+id/action_FifthFragment_to_FourthFragment"
             app:destination="@id/FourthFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/SixthFragment"
+        android:name="com.faryz.sciencevibeapp.SixthFragment"
+        android:label="@string/sixth_fragment_label"
+        tools:layout="@layout/fragment_sixth" />
 </navigation>

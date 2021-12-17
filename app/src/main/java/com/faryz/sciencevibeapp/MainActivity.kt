@@ -1,5 +1,8 @@
 package com.faryz.sciencevibeapp
 
+import android.content.Context
+import android.content.Intent
+import android.media.MediaPlayer
 import android.os.Bundle
 import com.google.android.material.snackbar.Snackbar
 import androidx.appcompat.app.AppCompatActivity
@@ -25,6 +28,9 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         setSupportActionBar(binding.toolbar)
+
+        val intent = Intent(this, MyService::class.java)
+        startService(intent)
 
         val navController = findNavController(R.id.nav_host_fragment_content_main)
         appBarConfiguration = AppBarConfiguration(navController.graph)
