@@ -58,4 +58,8 @@ class MainActivity : AppCompatActivity() {
         return navController.navigateUp(appBarConfiguration)
                 || super.onSupportNavigateUp()
     }
+
+    override fun onBackPressed() {
+        
+    }
 }
