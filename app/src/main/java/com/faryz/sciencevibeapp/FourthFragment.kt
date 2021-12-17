@@ -120,31 +120,43 @@ class FourthFragment : Fragment() {
         db.collection("list question").document("year $year")
             .get()
             .addOnSuccessListener {
-                // get list question
-                for (question in it.data!!.keys.sorted()) {
-                    listQuestion.add(ListQuestion(question))
-                }
-                d("listQuestion" , "${it.data!!.keys.sorted()}")
+                try {
+                    // get list question
+                    for (question in it.data!!.keys.sorted()) {
+                        listQuestion.add(ListQuestion(question))
+                    }
+                    d("listQuestion" , "${it.data!!.keys.sorted()}")
 
-                // get option contain link for the image
-                for (option in it.data!!.values) {
-                    val v = option as ArrayList<String>
-                    listOption.add(ListOption(v[0], v[1], v[2], v[3]))
-                }
+                    // get option contain link for the image
+                    for (option in it.data!!.values) {
+                        val v = option as ArrayList<String>
+                        listOption.add(ListOption(v[0], v[1], v[2], v[3]))
+                    }
 
-                displayQuestion()
-                nextQuestion()
+                    displayQuestion()
+                    nextQuestion()
+                }catch (e: kotlin.NullPointerException) {
+                    
+                }
             }
+            .addOnFailureListener {  }
         // get answer
         db.collection("list answer").document("year $year")
             .get()
             .addOnSuccessListener {
-                for (answer in it.data!!.values) {
-                    val ans = answer as ArrayList<String>
-                    for (a in ans) {
-                        listAnswer.add(ListAnswer(a))
+                try {
+                    for (answer in it.data!!.values) {
+                        val ans = answer as ArrayList<String>
+                        for (a in ans) {
+                            listAnswer.add(ListAnswer(a))
+                        }
                     }
+                } catch (e: java.lang.NullPointerException) {
+
                 }
+            }
+            .addOnFailureListener {
+
             }
         enableButton(true)
         binding.progressBar2.isVisible = false
