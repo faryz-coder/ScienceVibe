@@ -137,14 +137,20 @@ class FourthFragment : Fragment() {
                     // get list question
                     for (question in it.data!!.keys.sorted()) {
                         listQuestion.add(ListQuestion(question))
+
+                        // get option contain link for the image
+                        val option = it.data!!.get(question)
+                        val v = option as ArrayList<String>
+//                        d("bomoh", "option: $v")
+                        listOption.add(ListOption(v[0], v[1], v[2], v[3]))
                     }
                     d("listQuestion" , "${it.data!!.keys.sorted()}")
 
                     // get option contain link for the image
-                    for (option in it.data!!.values) {
-                        val v = option as ArrayList<String>
-                        listOption.add(ListOption(v[0], v[1], v[2], v[3]))
-                    }
+//                    for (option in it.data!!.values) {
+//                        val v = option as ArrayList<String>
+//                        listOption.add(ListOption(v[0], v[1], v[2], v[3]))
+//                    }
 
                     displayQuestion()
                     nextQuestion()
