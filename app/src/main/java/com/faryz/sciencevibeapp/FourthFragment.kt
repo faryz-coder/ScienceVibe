@@ -55,21 +55,25 @@ class FourthFragment : Fragment() {
         }
 
         binding.imageA.setOnClickListener {
+            d("bomoh", "button pressed")
+            enableButton(false)
             submitAnswer("A")
         }
         binding.imageB.setOnClickListener {
+            enableButton(false)
             submitAnswer("B")
         }
         binding.imageC.setOnClickListener {
+            enableButton(false)
             submitAnswer("C")
         }
         binding.imageD.setOnClickListener {
+            enableButton(false)
             submitAnswer("D")
         }
     }
 
     private fun submitAnswer(ans: String) {
-        enableButton(false)
         d("submitAnswer", "ans:$ans, count: $count")
         if (count < 1) {
             var year = 7
@@ -80,25 +84,34 @@ class FourthFragment : Fragment() {
             getListQuestion(year)
         }
         else if (count > 0 && count <= listQuestion.size) {
-            checkAnswer(ans)
-            Handler(Looper.getMainLooper()).postDelayed({
-                if (count<listQuestion.size) {
-                   nextQuestion()
-                } else {
-                    findNavController().navigate(R.id.action_FourthFragment_to_SixthFragment)
-                }
-            }, delay)
+            if (checkAnswer(ans)) {
+                Handler(Looper.getMainLooper()).postDelayed({
+                    if (count<listQuestion.size) {
+                        nextQuestion()
+                    } else {
+                        findNavController().navigate(R.id.action_FourthFragment_to_SixthFragment)
+                    }
+                }, delay)
+            } else {
+                enableButton(true)
+            }
+        }else {
+            enableButton(true)
         }
+
     }
 
-    private fun checkAnswer(ans: String) {
-        if (listAnswer[count-1].answer == ans) {
+    private fun checkAnswer(ans: String) : Boolean {
+        val valid = if (listAnswer[count-1].answer == ans) {
             binding.monkeyBubble.setImageResource(R.drawable.correct_logo)
             playCorrect(0)
+            true
         } else {
             binding.monkeyBubble.setImageResource(R.drawable.wrong_logo)
             playCorrect(1)
+            false
         }
+        return valid
     }
 
     private fun nextQuestion() {
